@@ -30,21 +30,24 @@ public class StudentResource {
     }
 
     @PatchMapping("api/add-student-to-class/{name-class}/{id}")
-    public ResponseEntity<?> addStudentToClass(@PathVariable("id") Long idStudent, @PathVariable("name-class") String nameClass) {
+    public ResponseEntity<?> addStudentToClass(@PathVariable("id") Long idStudent,
+                                               @PathVariable("name-class") String nameClass) {
         if (studentService.addStudentToClass(nameClass, idStudent))
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body("");
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("not found class or student");
     }
 
     @PutMapping("api/student/{id}")
-    public ResponseEntity<String> updateScore(@PathVariable Long id, @RequestParam double score) {
+    public ResponseEntity<String> updateScore(@PathVariable Long id,
+                                              @RequestParam double score) {
         if (studentService.updateScore(id, score))
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body("");
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("not found class or student");
     }
 
     @DeleteMapping("api/remove-student/{name-class}/{id}")
-    public ResponseEntity<String> removeStudentFromClass(@PathVariable("id") Long idStudent, @PathVariable("name-class") String nameClass) {
+    public ResponseEntity<String> removeStudentFromClass(@PathVariable("id") Long idStudent,
+                                                         @PathVariable("name-class") String nameClass) {
         if (studentService.removeStudentFromClass(idStudent, nameClass))
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body("");
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("not found class or student");

@@ -14,22 +14,18 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Clasz {
+public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String address;
-    @Column(columnDefinition = "varchar(50) default 'open'", nullable = false)
-    private String status;
-
-    @OneToMany(mappedBy = "clasz")
-    private Set<Student> students;
+    @Column(name = "number-lecture")
+    private int numberOfLecture;
 
     @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name = "class_teacher",
-            joinColumns = @JoinColumn(name = "class_id"),
-            inverseJoinColumns = @JoinColumn(name = "teacher_id"))
+    @JoinTable(name = "course_student",
+            joinColumns = @JoinColumn(name = "course_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id"))
     @JsonBackReference
-    private Set<Teacher> teachers;
+    private Set<Student> students;
 }
